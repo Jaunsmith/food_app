@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:food_app/screens/auth/sign_up_screen.dart';
 import 'package:food_app/utilities/route/app_route.dart';
 import 'package:get/get.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
@@ -58,7 +59,8 @@ class _SplashScreenState extends State<SplashScreen>
     ).animate(animationControllerText);
 
     // this part let all what we animated display and then moved to the designated page to be display which is the homepage
-    Timer(Duration(seconds: 6), () => Get.toNamed(AppRoute.getInitialPage()));
+    // Timer(Duration(seconds: 6), () => Get.toNamed(AppRoute.getInitialPage()));
+    Timer(Duration(seconds: 6), () => Get.to(SignUpScreen()));
   }
 
   @override
