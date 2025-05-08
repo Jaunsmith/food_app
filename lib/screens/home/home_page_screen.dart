@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/screens/cart/cart_history.dart';
 import 'package:food_app/screens/cart/cart_picked_item_screen.dart';
 import 'package:food_app/screens/home/main_food_screen.dart';
+import 'package:food_app/screens/user/user_page.dart';
 import 'package:food_app/utilities/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,12 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedPage = 0;
-  List pages = [
-    MainFoodPage(),
-    CartHistory(),
-    CartPickedItem(),
-    Container(child: Center(child: Text('Page 4'))),
-  ];
+  List pages = [MainFoodPage(), CartHistory(), CartPickedItem(), UserPage()];
 
   void navFunction(int index) {
     setState(() {

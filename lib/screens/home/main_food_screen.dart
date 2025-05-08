@@ -6,7 +6,10 @@ import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 import 'package:food_app/widgets/main_text.dart';
 import 'package:food_app/widgets/sub_text.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/food_list_controller.dart';
+import '../../controllers/main_food_controller.dart';
 import 'body/food_page_screen.dart';
 
 class MainFoodPage extends StatefulWidget {
@@ -32,6 +35,11 @@ class _MainFoodPageState extends State<MainFoodPage> {
     });
   }
 
+  Future<void> _loadData() async {
+    await Get.find<MainFoodController>().getMainProductList();
+    await Get.find<FoodListController>().getFoodListProductList();
+  }
+
   // This help in auto updating the time
   @override
   void initState() {
@@ -50,9 +58,10 @@ class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
     getDate();
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
+    return RefreshIndicator(
+      color: AppColors.mainColor,
+      onRefresh: _loadData,
+      child: Column(
         children: [
           //The header part of the home page...
           Container(
