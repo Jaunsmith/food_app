@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:food_app/screens/auth/sign_up_screen.dart';
-import 'package:food_app/utilities/route/app_route.dart';
+
 import 'package:get/get.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 
