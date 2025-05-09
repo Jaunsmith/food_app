@@ -7,6 +7,8 @@ import 'package:food_app/widgets/main_text.dart';
 import 'package:food_app/widgets/sub_text.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/show_error_messages.dart';
+
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
@@ -16,6 +18,41 @@ class SignUpScreen extends StatelessWidget {
     var passwordController = TextEditingController();
     var nameController = TextEditingController();
     var phoneController = TextEditingController();
+
+    void _registration() {
+      // . trim() remove any white space there and only grap the text
+      String name = nameController.text.trim();
+      String email = emailController.text.trim();
+      String phone = phoneController.text.trim();
+      String password = passwordController.text.trim();
+
+      if (name.isEmpty) {
+        showErrorMessage('Enter your name', title: 'Name');
+      } else if (!GetUtils.isEmail(email)) {
+        showErrorMessage('Enter your valid mail', title: 'Mail');
+      } else if (phone.isEmpty) {
+        showErrorMessage('Enter your phone number', title: 'Phone number');
+      } else if (password.isEmpty) {
+        showErrorMessage('Enter your password', title: 'Password');
+      } else if (password.length < 8) {
+        showErrorMessage(
+          'Password can\'t be less than 8 character',
+          title: 'Password',
+        );
+      } else if (email.isEmpty) {
+        showErrorMessage('Enter your Email', title: 'Email');
+      } else {
+        showErrorMessage(
+          'Valid data details',
+          title: 'Submitted',
+          color: AppColors.mainColor,
+          icons: Icons.check,
+          iconColor: Colors.white,
+        );
+      }
+      print('The details are $name    $email   $phone   $password   ');
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -72,27 +109,36 @@ class SignUpScreen extends StatelessWidget {
                   textInputType: TextInputType.phone,
                   isPassword: false,
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: DynamicDimensions.size20),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: DynamicDimensions.size45,
-                    vertical: DynamicDimensions.size15,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      DynamicDimensions.size30,
+                GestureDetector(
+                  onTap: () {
+                    _registration();
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: DynamicDimensions.size20),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: DynamicDimensions.size45,
+                      vertical: DynamicDimensions.size15,
                     ),
-                    color: AppColors.mainColor,
-                  ),
-                  child: MainText(
-                    text: 'Sign Up ',
-                    color: Colors.white,
-                    fontSize: 25,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        DynamicDimensions.size30,
+                      ),
+                      color: AppColors.mainColor,
+                    ),
+                    child: MainText(
+                      text: 'Sign Up ',
+                      color: Colors.white,
+                      fontSize: 25,
+                    ),
                   ),
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => SignInScreen());
+                    Get.to(
+                      () => SignInScreen(),
+                      transition: Transition.fade,
+                      duration: Duration(seconds: 2),
+                    );
                   },
                   child: SubText(text: 'Have an account?', fontSize: 20),
                 ),

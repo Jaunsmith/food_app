@@ -63,6 +63,7 @@ class SignInScreen extends StatelessWidget {
                 icons: Icons.password_sharp,
                 controller: passwordController,
                 textInputType: TextInputType.visiblePassword,
+                isPassword: true,
               ),
             ],
           ),
@@ -109,7 +110,11 @@ class SignInScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => SignUpScreen());
+                  Get.to(
+                    () => SignUpScreen(),
+                    transition: Transition.fadeIn,
+                    duration: Duration(seconds: 2),
+                  );
                 },
                 child: MainText(text: 'Create'),
               ),
