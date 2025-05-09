@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 import 'package:food_app/widgets/main_text.dart';
 import 'package:get/get.dart';
