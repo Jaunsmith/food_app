@@ -1,7 +1,9 @@
+import 'package:food_app/controllers/auth_controller.dart';
 import 'package:food_app/controllers/cart_items_controller.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
 import 'package:food_app/data_process/api/api_client.dart';
+import 'package:food_app/data_process/repository/auth_repo.dart';
 import 'package:food_app/data_process/repository/cart_items_repo.dart';
 import 'package:food_app/data_process/repository/food_list_repo.dart';
 import 'package:food_app/data_process/repository/main_food_repo.dart';
@@ -19,6 +21,9 @@ Future<void> init() async {
 
   //apiclient
   Get.lazyPut(() => ApiClient(appBaseUrl: ConstantData.BASE_URL));
+  Get.lazyPut(
+    () => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()),
+  );
 
   // since the repo takes apiclient the get.find help us to locate it and load it to the repo...
   // kindly note the name must match the name you use to initialize the file for instance here the name we used to initialize the Apiclient in the repo is apiclient with this the getx will be able to help us find it..
@@ -31,4 +36,5 @@ Future<void> init() async {
   Get.lazyPut(() => MainFoodController(mainFoodRepo: Get.find()));
   Get.lazyPut(() => FoodListController(foodListRepo: Get.find()));
   Get.lazyPut(() => CartItemsController(cartItemsRepo: Get.find()));
+  Get.lazyPut(() => AuthController(authRepo: Get.find()));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/models/sign_up_model.dart';
 import 'package:food_app/screens/auth/sign_in_screen.dart';
 import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
@@ -49,8 +50,14 @@ class SignUpScreen extends StatelessWidget {
           icons: Icons.check,
           iconColor: Colors.white,
         );
+        SignUpModel signUpModel = SignUpModel(
+          email: email,
+          password: password,
+          phone: phone,
+          name: name,
+        );
+        print('The entered details are  ${signUpModel}');
       }
-      print('The details are $name    $email   $phone   $password   ');
     }
 
     return Scaffold(
@@ -124,6 +131,14 @@ class SignUpScreen extends StatelessWidget {
                         DynamicDimensions.size30,
                       ),
                       color: AppColors.mainColor,
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(1, 7),
+                          color: Colors.grey.shade300,
+                          blurRadius: 10,
+                          spreadRadius: 7,
+                        ),
+                      ],
                     ),
                     child: MainText(
                       text: 'Sign Up ',
@@ -132,6 +147,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: DynamicDimensions.size20),
                 TextButton(
                   onPressed: () {
                     Get.to(

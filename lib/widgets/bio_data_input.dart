@@ -36,13 +36,13 @@ class _BioDataInputState extends State<BioDataInput> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(DynamicDimensions.size30),
+        borderRadius: BorderRadius.circular(DynamicDimensions.size10),
         boxShadow: [
           BoxShadow(
-            blurRadius: 10,
-            spreadRadius: 7,
-            offset: Offset(1, 10),
-            color: Colors.grey.shade300,
+            blurRadius: 15,
+            spreadRadius: 5,
+            offset: Offset(1, 2),
+            color: Colors.grey.shade200,
           ),
         ],
       ),

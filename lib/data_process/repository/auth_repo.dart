@@ -1,0 +1,34 @@
+import 'package:food_app/data_process/api/api_client.dart';
+import 'package:food_app/models/sign_up_model.dart';
+import 'package:food_app/utilities/constant_data.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class AuthRepo {
+  final ApiClient apiClient;
+  // to save the token that will be send from the server for authentication purpose
+  final SharedPreferences sharedPreferences;
+
+  AuthRepo({required this.apiClient, required this.sharedPreferences});
+
+  Future<Response> registration(SignUpModel sigUpModel) async {
+    // The data need to be converted to Json since we are sending it to the server...
+    Response response = await apiClient.postData(
+      ConstantData.REGISTRATION_URL,
+      sigUpModel.toJson(),
+    );
+    return response;
+  }
+
+  // This is used to authenticate a user...sent from the server
+  userToken(String token) async {
+    apiClient.token = token;
+    apiClient.updateHeader(token);
+    // the token is saved in other to keep the data in the phone local memory for future use ...
+    var savedData = await sharedPreferences.setString(
+      ConstantData.TOKEN,
+      token,
+    );
+    return savedData;
+  }
+}

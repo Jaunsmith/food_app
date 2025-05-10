@@ -28,12 +28,36 @@ class ApiClient extends GetConnect implements GetxService {
       Response response = await get(uri);
       return response;
     } catch (e) {
-      // Return the error incase the data is failed to get...
+      // Return the error in case the data is failed to get...
       return Response(
         // this return the error type
         statusCode: 1,
         statusText: e.toString(),
       );
     }
+  }
+
+  Future<Response> postData(String uri, dynamic body) async {
+    try {
+      // The header is what tell the data type sending to the server...
+      Response response = await post(uri, body, headers: _mainHeaders);
+      return response;
+    } catch (e) {
+      print('The error gotten is  ${e.toString()}');
+      return Response(
+        // this return the error type
+        statusCode: 1,
+        statusText: e.toString(),
+      );
+    }
+  }
+
+  void updateHeader(String token) {
+    _mainHeaders = {
+      //The header is needed in other to get  response and post request from the server and it should be in json format
+      'Content-type': 'application/json; charset=UTF-8',
+      // This is use for authentication.. the type of the token is bearer...
+      'Authorization': 'Bearer $token',
+    };
   }
 }
