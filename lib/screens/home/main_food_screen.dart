@@ -43,7 +43,6 @@ class _MainFoodPageState extends State<MainFoodPage> {
   // This help in auto updating the time
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getDate();
     _timer = Timer.periodic(Duration(seconds: 1), (duration) => getDate());
