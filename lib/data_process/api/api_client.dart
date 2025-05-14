@@ -11,7 +11,16 @@ class ApiClient extends GetConnect implements GetxService {
     baseUrl = appBaseUrl;
     // how long the data should take to check
     timeout = Duration(seconds: 30);
+    allowAutoSignedCert = true;
+
     token = ConstantData.TOKEN;
+
+    httpClient.addRequestModifier<dynamic>((request) {
+      request.headers['Accept'] = 'application/json';
+      request.headers['Authorization'] = 'Bearer $token'; // ✅ token header
+      return request;
+    });
+
     _mainHeaders = {
       //The header is needed in other to get  response and post request from the server and it should be in json format
       'Content-type': 'application/json; charset=UTF-8',
@@ -26,6 +35,8 @@ class ApiClient extends GetConnect implements GetxService {
     try {
       // This get the response gotten from the server and save it in the response variable of Response type
       Response response = await get(uri);
+      print("⚡ Status Code: ${response.statusCode}");
+      print("⚡ Response Body: ${response.body}");
       return response;
     } catch (e) {
       // Return the error in case the data is failed to get...
@@ -38,9 +49,11 @@ class ApiClient extends GetConnect implements GetxService {
   }
 
   Future<Response> postData(String uri, dynamic body) async {
+    print('The data body sent is  $body');
     try {
       // The header is what tell the data type sending to the server...
       Response response = await post(uri, body, headers: _mainHeaders);
+      print('The response from the server is : $response');
       return response;
     } catch (e) {
       print('The error gotten is  ${e.toString()}');

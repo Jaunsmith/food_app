@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Food Delivery',
               // home: CartHistory(),
-              initialRoute: AppRoute.getSplashscreen(),
+              initialRoute: AppRoute.getInitialPage(),
               getPages: AppRoute.routes,
             );
           },

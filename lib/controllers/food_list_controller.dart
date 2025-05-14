@@ -24,6 +24,7 @@ class FoodListController extends GetxController {
       _foodListProductList = [];
       _foodListProductList.addAll(Product.fromJson(response.body).products);
       _dataAvailable = true;
+      print('The length of the foodList is ${_foodListProductList.length}');
       update();
     } else {
       print("❌list  Error getting products:");

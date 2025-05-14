@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
+import 'package:food_app/models/main_food_model.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 import 'package:food_app/utilities/route/app_route.dart';
 import 'package:food_app/widgets/main_text.dart';
@@ -10,15 +11,42 @@ import '../../../utilities/colors.dart';
 import '../../../utilities/constant_data.dart';
 import '../../../widgets/icon_text.dart';
 
-Widget foodListPage() {
-  return GetBuilder<FoodListController>(
-    builder: (foodListProduct) {
-      return foodListProduct.dataAvailable
-          ? ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+class FoodListPage extends StatefulWidget {
+  const FoodListPage({super.key});
+
+  @override
+  State<FoodListPage> createState() => _FoodListPageState();
+}
+
+class _FoodListPageState extends State<FoodListPage> {
+  final FoodListController foodListController = Get.find();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    foodListController.getFoodListProductList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<FoodListController>(
+      builder: (foodListProduct) {
+        if (!foodListProduct.dataAvailable &&
+            foodListProduct.foodListProductList.isEmpty) {
+          return Center(
+            child: CircularProgressIndicator.adaptive(
+              backgroundColor: AppColors.mainColor,
+              strokeWidth: 10,
+            ),
+          );
+        } else {
+          return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: foodListProduct.foodListProductList.length,
             itemBuilder: (context, index) {
+              final food = foodListProduct.foodListProductList[index];
               return GestureDetector(
                 onTap: () {
                   Get.toNamed(AppRoute.getFoodListPage(index, ''));
@@ -45,7 +73,7 @@ Widget foodListPage() {
                         ),
                         child: PreLoadingPage(
                           imagePath:
-                              '${ConstantData.BASE_URL}${ConstantData.UPLOAD_URL}${foodListProduct.foodListProductList[index].img}',
+                              '${ConstantData.BASE_URL}${ConstantData.UPLOAD_URL}${food.img}',
                         ),
                       ),
                       Expanded(
@@ -70,14 +98,11 @@ Widget foodListPage() {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                MainText(
-                                  text:
-                                      foodListProduct
-                                          .foodListProductList[index]
-                                          .name,
-                                ),
+                                MainText(text: food.name ?? 'Unknown'),
                                 SizedBox(height: DynamicDimensions.size10),
-                                SubText(text: 'with Chinese characteristics'),
+                                const SubText(
+                                  text: 'with Chinese characteristics',
+                                ),
                                 SizedBox(height: DynamicDimensions.size10),
                                 Row(
                                   mainAxisAlignment:
@@ -110,10 +135,9 @@ Widget foodListPage() {
                 ),
               );
             },
-          )
-          : Center(
-            child: CircularProgressIndicator(color: AppColors.mainColor),
           );
-    },
-  );
+        }
+      },
+    );
+  }
 }

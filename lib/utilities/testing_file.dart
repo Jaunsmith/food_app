@@ -520,4 +520,7 @@ class CartHistory extends StatelessWidget {
   }
 }
 
+
+static const String BASE_URL = 'https://mvs.bslmeiyu.com';
+
 */

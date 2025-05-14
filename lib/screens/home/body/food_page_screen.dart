@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
+import 'package:food_app/data_process/repository/food_list_repo.dart';
 import 'package:food_app/screens/home/body/page_builder_function.dart';
 import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
@@ -19,6 +20,7 @@ class FoodPage extends StatefulWidget {
 }
 
 class _FoodPageState extends State<FoodPage> {
+  FoodListRepo foodListRepo = FoodListRepo(apiClient: Get.find());
   PageController pageController = PageController(viewportFraction: 0.85);
   // in other to make the page display at ago more one will use the pageController..
   // The whole page is 1 but setting to certain to fraction make it to display images till it reach the size of 1...
@@ -28,6 +30,7 @@ class _FoodPageState extends State<FoodPage> {
   @override
   void initState() {
     super.initState();
+    foodListRepo.getFoodListProductList();
     // To get the current page value...  listener need to be attach to the controller..
     pageController.addListener(() {
       // This will be updating the current page value in real time... as we move and down the page...
@@ -74,7 +77,14 @@ class _FoodPageState extends State<FoodPage> {
                   ),
                 )
                 : Container(
-                  child: CircularProgressIndicator(color: AppColors.mainColor),
+                  child: Text(
+                    mainProduct.isBlank == true
+                        ? 'Main Product is blank'
+                        : 'something went wrong',
+                  ),
+                  // child: CircularProgressIndicator.adaptive(
+                  //   backgroundColor: AppColors.mainColor,
+                  // ),
                 );
           },
         ),
@@ -128,7 +138,7 @@ class _FoodPageState extends State<FoodPage> {
             ],
           ),
         ),
-        foodListPage(),
+        FoodListPage(),
       ],
     );
   }

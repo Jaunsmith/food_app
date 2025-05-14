@@ -28,19 +28,24 @@ class MainFoodController extends GetxController {
 
   // This is helping us to get the data from the internet and saving it for local use in the app
   Future<void> getMainProductList() async {
-    Response response = await mainFoodRepo.getMainProductList();
+    try {
+      Response response = await mainFoodRepo.getMainProductList();
 
-    if (response.statusCode == 200) {
-      // why initialize to null here is to avoid duplicate data ... cause the method might be called many times
-      _mainProductList = [];
-      _mainProductList.addAll(Product.fromJson(response.body).products);
-      _dataAvailable = true;
-      update();
-    } else {
-      print("❌ Error getting products:");
-      print("Status Code: ${response.statusCode}");
-      print("Status Text: ${response.statusText}");
-      print("Response Body: ${response.body}");
+      if (response.statusCode == 200) {
+        // why initialize to null here is to avoid duplicate data ... cause the method might be called many times
+        _mainProductList = [];
+        _mainProductList.addAll(Product.fromJson(response.body).products);
+
+        _dataAvailable = true;
+        update();
+      } else {
+        print("❌ Error getting products:");
+        print("Status Code: ${response.statusCode}");
+        print("Status Text: ${response.statusText}");
+        print("Response Body: ${response.body}");
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 

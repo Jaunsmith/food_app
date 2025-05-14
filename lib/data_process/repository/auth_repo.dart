@@ -11,6 +11,7 @@ class AuthRepo {
 
   AuthRepo({required this.apiClient, required this.sharedPreferences});
 
+  // For registration ...
   Future<Response> registration(SignUpModel sigUpModel) async {
     // The data need to be converted to Json since we are sending it to the server...
     Response response = await apiClient.postData(
@@ -20,8 +21,22 @@ class AuthRepo {
     return response;
   }
 
+  Future<String> getUserToken() async {
+    return sharedPreferences.getString(ConstantData.TOKEN) ?? 'None';
+  }
+
+  // for login
+  Future<Response> login(String email, String password) async {
+    // The data need to be converted to Json since we are sending it to the server...
+    Response response = await apiClient.postData(ConstantData.LOGIN_URL, {
+      'email': email,
+      'password': password,
+    });
+    return response;
+  }
+
   // This is used to authenticate a user...sent from the server
-  userToken(String token) async {
+  Future<bool> userToken(String token) async {
     apiClient.token = token;
     apiClient.updateHeader(token);
     // the token is saved in other to keep the data in the phone local memory for future use ...
@@ -30,5 +45,15 @@ class AuthRepo {
       token,
     );
     return savedData;
+  }
+
+  // This hold the user login details ...
+  Future<void> saveUserLoginDetails(String phone, String password) async {
+    try {
+      await sharedPreferences.setString(ConstantData.PHONE, phone);
+      await sharedPreferences.setString(ConstantData.PASSWORD, password);
+    } catch (e) {
+      throw e;
+    }
   }
 }

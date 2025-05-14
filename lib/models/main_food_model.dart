@@ -14,10 +14,10 @@ class Product {
     required products,
     required stars,
   }) {
-    this._totalSize = totalSize;
-    this._typeId = typeId;
-    this._offset = offset;
-    this._stars = stars;
+    _totalSize = totalSize;
+    _typeId = typeId;
+    _offset = offset;
+    _stars = stars;
   }
 
   Product.fromJson(Map<String, dynamic> json) {
