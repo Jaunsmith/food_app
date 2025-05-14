@@ -12,6 +12,6 @@ class MainFoodRepo extends GetxService {
   // repo has the instance of the apiclient in other to communicate with it
   // this pass the url to the api client so that it can be able to get us data from the server...
   Future<Response> getMainProductList() async {
-    return await apiClient.getData(ConstantData.MAIN_FOOD_URL);
+    return await apiClient.getData(ConstantData.DRINK_LIST_URL);
   }
 }

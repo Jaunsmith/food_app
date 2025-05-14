@@ -20,7 +20,7 @@ class FoodPage extends StatefulWidget {
 }
 
 class _FoodPageState extends State<FoodPage> {
-  FoodListRepo foodListRepo = FoodListRepo(apiClient: Get.find());
+  MainFoodController mainFoodController = Get.find();
   PageController pageController = PageController(viewportFraction: 0.85);
   // in other to make the page display at ago more one will use the pageController..
   // The whole page is 1 but setting to certain to fraction make it to display images till it reach the size of 1...
@@ -30,7 +30,7 @@ class _FoodPageState extends State<FoodPage> {
   @override
   void initState() {
     super.initState();
-    foodListRepo.getFoodListProductList();
+    mainFoodController.getMainProductList();
     // To get the current page value...  listener need to be attach to the controller..
     pageController.addListener(() {
       // This will be updating the current page value in real time... as we move and down the page...
