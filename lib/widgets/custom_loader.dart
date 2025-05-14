@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/controllers/auth_controller.dart';
 import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 
