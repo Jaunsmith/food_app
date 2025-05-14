@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
-import 'package:food_app/models/main_food_model.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 import 'package:food_app/utilities/route/app_route.dart';
 import 'package:food_app/widgets/main_text.dart';
@@ -23,7 +22,6 @@ class _FoodListPageState extends State<FoodListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     foodListController.getFoodListProductList();
   }
