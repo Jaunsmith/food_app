@@ -7,7 +7,7 @@ class ConstantData {
   // static const String DRINK_LIST_URL = '/api/v1/products/drinks';
   static const String REGISTRATION_URL = '/api/v1/auth/register';
   static const String LOGIN_URL = '/api/v1/auth/login';
-  static const String TOKEN = 'OWOVICKKYTOKEN';
+  static const String TOKEN = '';
   static const String PHONE = '';
   static const String PASSWORD = '';
   static const String UPLOAD_URL = '/uploads/';

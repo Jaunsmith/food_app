@@ -17,7 +17,7 @@ class AuthController extends GetxController implements GetxService {
     update();
 
     Response response = await authRepo.registration(signUpModel);
-    ResponseModel responseModel;
+    late ResponseModel responseModel;
     if (response.statusCode == 200) {
       authRepo.userToken(response.body['token']);
       responseModel = ResponseModel(true, response.body['token']);
@@ -40,7 +40,7 @@ class AuthController extends GetxController implements GetxService {
     update();
 
     Response response = await authRepo.login(email, password);
-    ResponseModel responseModel;
+    late ResponseModel responseModel;
     if (response.statusCode == 200) {
       print('Back End token');
       authRepo.userToken(response.body['token']);

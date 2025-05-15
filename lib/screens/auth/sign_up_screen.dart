@@ -24,8 +24,6 @@ class SignUpScreen extends StatelessWidget {
     var phoneController = TextEditingController();
 
     void registration(AuthController authController) {
-      var authController = Get.find<AuthController>();
-
       // . trim() remove any white space there and only grap the text
       String name = nameController.text.trim();
       String email = emailController.text.trim();

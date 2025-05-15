@@ -55,7 +55,7 @@ class SignInScreen extends StatelessWidget {
               icons: Icons.close,
               iconColor: Colors.white,
             );
-            print('Teh error gotten is ${value.message}');
+            print('The error gotten is ${value.message}');
           }
         });
         print('The entered details are Email: $email   Password: $password');

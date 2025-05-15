@@ -48,9 +48,9 @@ class AuthRepo {
   }
 
   // This hold the user login details ...
-  Future<void> saveUserLoginDetails(String phone, String password) async {
+  Future<void> saveUserLoginDetails(String number, String password) async {
     try {
-      await sharedPreferences.setString(ConstantData.PHONE, phone);
+      await sharedPreferences.setString(ConstantData.PHONE, number);
       await sharedPreferences.setString(ConstantData.PASSWORD, password);
     } catch (e) {
       throw e;
