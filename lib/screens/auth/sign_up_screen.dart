@@ -24,6 +24,8 @@ class SignUpScreen extends StatelessWidget {
     var phoneController = TextEditingController();
 
     void registration(AuthController authController) {
+      var authController = Get.find<AuthController>();
+
       // . trim() remove any white space there and only grap the text
       String name = nameController.text.trim();
       String email = emailController.text.trim();
@@ -56,7 +58,7 @@ class SignUpScreen extends StatelessWidget {
           if (value.isSuccessful) {
             print('Successfully register');
             showErrorMessage(
-              'Valid data details',
+              'You have successfully register',
               title: 'Submitted',
               color: AppColors.mainColor,
               icons: Icons.check,
@@ -65,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
             Get.toNamed(AppRoute.getInitialPage());
           } else {
             showErrorMessage(
-              'user details already exist',
+              value.message.toString(),
               title: 'Error',
               icons: Icons.close,
               iconColor: Colors.white,
@@ -200,25 +202,19 @@ class SignUpScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Container(
-                                child: CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                    'assets/image/g.png',
-                                  ),
+                              CircleAvatar(
+                                backgroundImage: AssetImage(
+                                  'assets/image/g.png',
                                 ),
                               ),
-                              Container(
-                                child: CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                    'assets/image/t.png',
-                                  ),
+                              CircleAvatar(
+                                backgroundImage: AssetImage(
+                                  'assets/image/t.png',
                                 ),
                               ),
-                              Container(
-                                child: CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                    'assets/image/f.png',
-                                  ),
+                              CircleAvatar(
+                                backgroundImage: AssetImage(
+                                  'assets/image/f.png',
                                 ),
                               ),
                             ],

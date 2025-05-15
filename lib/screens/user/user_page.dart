@@ -61,11 +61,6 @@ class UserPage extends StatelessWidget {
                     iconBckColor: AppColors.yellowColor,
                   ),
                   DataInput(
-                    icons: Icons.email,
-                    text: 'Jaunsmith2016@gmail.com',
-                    iconBckColor: AppColors.yellowColor,
-                  ),
-                  DataInput(
                     icons: Icons.location_on,
                     text: 'Ondo road',
                     iconBckColor: AppColors.yellowColor,

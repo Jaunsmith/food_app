@@ -65,6 +65,7 @@ class ApiClient extends GetConnect implements GetxService {
     }
   }
 
+  // This help us to update the header automatically after the user register for authentication purpose
   void updateHeader(String token) {
     _mainHeaders = {
       //The header is needed in other to get  response and post request from the server and it should be in json format

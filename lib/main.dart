@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/controllers/cart_items_controller.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
+import 'package:food_app/screens/auth/sign_up_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_app/dependency/dependencies.dart' as dependent;
 
@@ -30,9 +31,9 @@ class MyApp extends StatelessWidget {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Food Delivery',
-              // home: CartHistory(),
-              initialRoute: AppRoute.getInitialPage(),
-              getPages: AppRoute.routes,
+              home: SignUpScreen(),
+              // initialRoute: AppRoute.getInitialPage(),
+              // getPages: AppRoute.routes,
             );
           },
         );

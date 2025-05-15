@@ -50,6 +50,7 @@ class _BioDataInputState extends State<BioDataInput> {
         controller: widget.controller,
         keyboardType: widget.textInputType,
         obscureText: widget.isPassword ? _obscure : false,
+        obscuringCharacter: '*',
         decoration: InputDecoration(
           hintText: widget.hintText,
           prefixIcon: Icon(widget.icons, color: AppColors.mainColor),
