@@ -179,4 +179,9 @@ class CartItemsController extends GetxController {
     cartItemsRepo.addItemsToStorage(getCartItem);
     update();
   }
+
+  void removeHistoryData() {
+    cartItemsRepo.removeHistoryData();
+    update();
+  }
 }

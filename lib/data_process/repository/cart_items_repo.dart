@@ -97,4 +97,10 @@ class CartItemsRepo {
     itemsStorage = [];
     sharedPreferences.remove(ConstantData.cartListItem);
   }
+
+  void removeHistoryData() {
+    removePickedData();
+    pickedItemsStorage = [];
+    sharedPreferences.remove(ConstantData.cartHistoryItem);
+  }
 }

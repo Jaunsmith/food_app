@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/controllers/auth_controller.dart';
+import 'package:food_app/controllers/cart_items_controller.dart';
+import 'package:food_app/utilities/route/app_route.dart';
 import 'package:food_app/widgets/data_input.dart';
 
 import '../../utilities/colors.dart';
 import '../../utilities/dynamic_dimensions.dart';
 import '../../widgets/main_text.dart';
+import 'package:get/get.dart';
+
+import '../../widgets/show_error_messages.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
@@ -67,8 +73,31 @@ class UserPage extends StatelessWidget {
                   ),
                   DataInput(
                     icons: Icons.message_outlined,
-                    text: 'I like tasting',
+                    text: 'Messages',
                     iconBckColor: Colors.redAccent,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      if (Get.find<AuthController>().logOut()) {
+                        Get.find<AuthController>().logOut();
+                        Get.find<CartItemsController>().removeHistoryData();
+                        showErrorMessage(
+                          'Log Out Successfully',
+                          title: 'Thanks',
+                          color: AppColors.mainColor,
+                          icons: Icons.check,
+                          iconColor: Colors.white,
+                          time: 3,
+                        );
+                        Get.toNamed(AppRoute.getSignInPage());
+                      }
+                      print('you taped logout');
+                    },
+                    child: DataInput(
+                      icons: Icons.logout_rounded,
+                      text: 'LogOut',
+                      iconBckColor: Colors.redAccent,
+                    ),
                   ),
                 ],
               ),

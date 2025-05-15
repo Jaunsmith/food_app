@@ -11,6 +11,7 @@ void showErrorMessage(
   Color color = const Color(0xFFFF0000),
   IconData icons = Icons.close,
   Color iconColor = const Color(0xFFFFFFFF),
+  int time = 0,
 }) {
   Get.snackbar(
     title,
@@ -26,5 +27,6 @@ void showErrorMessage(
       size: DynamicDimensions.size30,
       weight: DynamicDimensions.size30,
     ),
+    duration: Duration(seconds: time == 0 ? 1 : time),
   );
 }

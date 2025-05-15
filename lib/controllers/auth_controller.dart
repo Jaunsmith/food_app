@@ -79,4 +79,8 @@ class AuthController extends GetxController implements GetxService {
     print(' the check data is  $check');
     return check;
   }
+
+  bool logOut() {
+    return authRepo.logOut();
+  }
 }

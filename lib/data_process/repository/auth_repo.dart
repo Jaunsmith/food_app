@@ -64,4 +64,14 @@ class AuthRepo {
       throw e;
     }
   }
+
+  //for logging out of the application...
+  bool logOut() {
+    sharedPreferences.remove(ConstantData.TOKEN);
+    sharedPreferences.remove(ConstantData.PASSWORD);
+    sharedPreferences.remove(ConstantData.PHONE);
+    apiClient.token = '';
+    apiClient.updateHeader('');
+    return true;
+  }
 }

@@ -14,6 +14,7 @@ import 'package:food_app/widgets/sub_text.dart';
 import 'package:get/get.dart';
 
 import '../../utilities/constant_data.dart';
+import '../../widgets/show_error_messages.dart';
 import '../../widgets/superscript_item_count.dart';
 
 class CartPickedItem extends StatelessWidget {
@@ -385,6 +386,13 @@ class CartPickedItem extends StatelessWidget {
                                 true) {
                               cartItemsPage.getPickedItemsData();
                             } else {
+                              showErrorMessage(
+                                'You need to SignIn to your account',
+                                title: 'LogIn',
+                                icons: Icons.close,
+                                iconColor: Colors.white,
+                                time: 3,
+                              );
                               Get.toNamed(AppRoute.getSignInPage());
                             }
 
