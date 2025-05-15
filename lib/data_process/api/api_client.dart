@@ -1,23 +1,30 @@
-import 'package:food_app/utilities/constant_data.dart';
 import 'package:get/get.dart';
 
 class ApiClient extends GetConnect implements GetxService {
   // when talking to teh server token is used to communicate with server...
-  late String token;
+  String token;
   final String appBaseUrl;
   late Map<String, String> _mainHeaders;
 
-  ApiClient({required this.appBaseUrl}) {
+  ApiClient({required this.appBaseUrl, this.token = ''}) {
     baseUrl = appBaseUrl;
     // how long the data should take to check
     timeout = Duration(seconds: 30);
     allowAutoSignedCert = true;
-
-    token = ConstantData.TOKEN;
+    _mainHeaders = {
+      'Content-type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+    };
 
     httpClient.addRequestModifier<dynamic>((request) {
       request.headers['Accept'] = 'application/json';
-      request.headers['Authorization'] = 'Bearer $token'; // ✅ token header
+      if (token.isNotEmpty) {
+        // Only add auth header if token exists
+        request.headers['Authorization'] = 'Bearer $token';
+      }
       return request;
     });
 
@@ -48,20 +55,25 @@ class ApiClient extends GetConnect implements GetxService {
     }
   }
 
-  Future<Response> postData(String uri, dynamic body) async {
-    print('the data sent is :      $body');
+  Future<Response> postData(
+    String uri,
+    dynamic body, {
+    bool isAuthRequest = false,
+  }) async {
+    print('Sending to $uri with body: $body');
+
     try {
-      // The header is what tell the data type sending to the server...
-      Response response = await post(uri, body, headers: _mainHeaders);
-      print('The response from the server is : $response');
+      final headers =
+          isAuthRequest
+              ? {'Content-type': 'application/json; charset=UTF-8'}
+              : _mainHeaders;
+
+      Response response = await post(uri, body, headers: headers);
+      print('Response: ${response.statusCode} - ${response.body}');
       return response;
     } catch (e) {
-      print('The error gotten is  ${e.toString()}');
-      return Response(
-        // this return the error type
-        statusCode: 1,
-        statusText: e.toString(),
-      );
+      print('Error: $e');
+      return Response(statusCode: 1, statusText: e.toString());
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/controllers/auth_controller.dart';
 import 'package:food_app/controllers/cart_items_controller.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
@@ -380,7 +381,13 @@ class CartPickedItem extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            cartItemsPage.getPickedItemsData();
+                            if (Get.find<AuthController>().userLoggedIn() ==
+                                true) {
+                              cartItemsPage.getPickedItemsData();
+                            } else {
+                              Get.toNamed(AppRoute.getSignInPage());
+                            }
+
                             print('check out clicked');
                           },
                           child: Container(

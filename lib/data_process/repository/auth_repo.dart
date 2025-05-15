@@ -21,18 +21,26 @@ class AuthRepo {
     return response;
   }
 
+  // This is to save the token for authentication purpose....
   Future<String> getUserToken() async {
     return sharedPreferences.getString(ConstantData.TOKEN) ?? 'None';
   }
 
+  // confirming the status of the user if logged in or not...
+  bool userLoggedIn() {
+    var checking = sharedPreferences.containsKey(ConstantData.TOKEN);
+
+    print('it contain a token... $checking ');
+    return checking;
+  }
+
   // for login
-  Future<Response> login(String email, String password) async {
-    // The data need to be converted to Json since we are sending it to the server...
-    Response response = await apiClient.postData(ConstantData.LOGIN_URL, {
-      'email': email,
-      'password': password,
-    });
-    return response;
+  Future<Response> login(String number, String password) async {
+    return await apiClient.postData(
+      ConstantData.LOGIN_URL,
+      {'phone': number, 'password': password},
+      isAuthRequest: true, // This will prevent sending auth header
+    );
   }
 
   // This is used to authenticate a user...sent from the server

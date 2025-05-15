@@ -1,3 +1,4 @@
+import 'package:food_app/data_process/api/api_client.dart';
 import 'package:food_app/data_process/repository/auth_repo.dart';
 import 'package:food_app/models/response_model.dart';
 import 'package:food_app/models/sign_up_model.dart';
@@ -31,32 +32,51 @@ class AuthController extends GetxController implements GetxService {
   }
 
   // This is a login method communicating to the server and internet
-  Future<ResponseModel> login(String email, String password) async {
-    // Getting token...
-    print('Getting user token');
-    print('The saved token is:  ${authRepo.getUserToken().toString()}');
-    // this means data is loading or loaded
+  Future<ResponseModel> login(String number, String password) async {
+    ApiClient apiClient = Get.find();
     _loaded = true;
     update();
 
-    Response response = await authRepo.login(email, password);
-    late ResponseModel responseModel;
-    if (response.statusCode == 200) {
-      print('Back End token');
-      authRepo.userToken(response.body['token']);
-      print('The token is ${response.body['token'].toString()}');
-      responseModel = ResponseModel(true, response.body['token']);
-    } else {
-      responseModel = ResponseModel(false, response.statusText!);
-    }
+    try {
+      Response response = await authRepo.login(number, password);
 
-    _loaded = false;
-    update();
-    return responseModel;
+      // print('Full response: ${response.body}');
+      // print('Status code: ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final token = response.body['token'] ?? response.body['access_token'];
+        if (token == null) {
+          return ResponseModel(false, 'Token not found in response');
+        }
+
+        authRepo.userToken(token);
+        apiClient.updateHeader(token);
+        return ResponseModel(true, token);
+      } else {
+        return ResponseModel(
+          false,
+          response.statusText ??
+              response.body['message'] ??
+              'Login failed with status ${response.statusCode}',
+        );
+      }
+    } catch (e) {
+      return ResponseModel(false, e.toString());
+    } finally {
+      _loaded = false;
+      update();
+    }
   }
 
   // to hold the user login info...
   void saveUserLoginDetails(String number, String password) {
     authRepo.saveUserLoginDetails(number, password);
+  }
+
+  bool userLoggedIn() {
+    var check = authRepo.userLoggedIn();
+
+    print(' the check data is  $check');
+    return check;
   }
 }

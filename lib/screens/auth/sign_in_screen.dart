@@ -17,27 +17,23 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var emailController = TextEditingController();
+    var numberController = TextEditingController();
     var passwordController = TextEditingController();
 
     void login(AuthController authController) {
       // . trim() remove any white space there and only grap the text
-      String email = emailController.text.trim();
+      String phone = numberController.text.trim();
       String password = passwordController.text.trim();
 
-      if (!GetUtils.isEmail(email)) {
+      if (phone.isEmpty) {
         showErrorMessage('Enter your valid mail', title: 'Mail');
-      } else if (password.isEmpty) {
-        showErrorMessage('Enter your password', title: 'Password');
       } else if (password.length < 8) {
         showErrorMessage(
           'Password can\'t be less than 8 character',
           title: 'Password',
         );
-      } else if (email.isEmpty) {
-        showErrorMessage('Enter your Email', title: 'Email');
       } else {
-        authController.login(email, password).then((value) {
+        authController.login(phone, password).then((value) {
           if (value.isSuccessful) {
             print('Login Successful');
             showErrorMessage(
@@ -58,7 +54,7 @@ class SignInScreen extends StatelessWidget {
             print('The error gotten is ${value.message}');
           }
         });
-        print('The entered details are Email: $email   Password: $password');
+        print('The entered details are Email: $phone   Password: $password');
       }
     }
 
@@ -114,9 +110,9 @@ class SignInScreen extends StatelessWidget {
                     Column(
                       children: [
                         BioDataInput(
-                          hintText: 'Email',
-                          icons: Icons.email,
-                          controller: emailController,
+                          hintText: 'Number',
+                          icons: Icons.phone,
+                          controller: numberController,
                           textInputType: TextInputType.phone,
                         ),
                         BioDataInput(

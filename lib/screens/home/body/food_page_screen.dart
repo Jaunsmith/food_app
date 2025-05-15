@@ -1,7 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
-import 'package:food_app/data_process/repository/food_list_repo.dart';
 import 'package:food_app/screens/home/body/page_builder_function.dart';
 import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';

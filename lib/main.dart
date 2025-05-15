@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_app/controllers/cart_items_controller.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
-import 'package:food_app/screens/auth/sign_up_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_app/dependency/dependencies.dart' as dependent;
+
+import 'package:food_app/utilities/route/app_route.dart';
 
 Future<void> main() async {
   // This ensure the dependencies is loaded before it run the application...
@@ -29,9 +30,9 @@ class MyApp extends StatelessWidget {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Food Delivery',
-              home: SignUpScreen(),
-              // initialRoute: AppRoute.getInitialPage(),
-              // getPages: AppRoute.routes,
+              //home: SignUpScreen(),
+              initialRoute: AppRoute.getSplashscreen(),
+              getPages: AppRoute.routes,
             );
           },
         );

@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:food_app/screens/auth/sign_up_screen.dart';
 
 import 'package:get/get.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 
 import '../../controllers/food_list_controller.dart';
 import '../../controllers/main_food_controller.dart';
+import '../../utilities/route/app_route.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     // this part let all what we animated display and then moved to the designated page to be display which is the homepage
     // Timer(Duration(seconds: 6), () => Get.toNamed(AppRoute.getInitialPage()));
-    Timer(Duration(seconds: 6), () => Get.to(SignUpScreen()));
+    Timer(Duration(seconds: 6), () => Get.toNamed(AppRoute.getInitialPage()));
   }
 
   @override
