@@ -6,8 +6,6 @@ import 'package:food_app/screens/auth/sign_up_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_app/dependency/dependencies.dart' as dependent;
 
-import 'package:food_app/utilities/route/app_route.dart';
-
 Future<void> main() async {
   // This ensure the dependencies is loaded before it run the application...
   WidgetsFlutterBinding.ensureInitialized();
