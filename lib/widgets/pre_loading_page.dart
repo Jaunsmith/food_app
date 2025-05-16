@@ -45,9 +45,9 @@ class PreLoadingPage extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CircularProgressIndicator(
+                    CircularProgressIndicator.adaptive(
                       value: total != null ? loaded / total : null,
-                      color: AppColors.mainColor,
+                      backgroundColor: AppColors.mainColor,
                     ),
                     SizedBox(height: DynamicDimensions.size5),
                     MainText(

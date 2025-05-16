@@ -4,7 +4,7 @@ import 'package:food_app/utilities/dynamic_dimensions.dart';
 class MainText extends StatelessWidget {
   const MainText({
     super.key,
-    this.color = const Color(0xFF332d2b),
+    this.color,
     required this.text,
     this.fontSize = 0,
     this.textOverflow = TextOverflow.ellipsis,
@@ -12,7 +12,7 @@ class MainText extends StatelessWidget {
     this.textAlign = TextAlign.start,
   });
 
-  final Color color;
+  final Color? color;
   final String text;
   final double fontSize;
   final TextOverflow textOverflow;
@@ -27,9 +27,9 @@ class MainText extends StatelessWidget {
       maxLines: maxLines == 0 ? 1 : maxLines,
       style: TextStyle(
         fontFamily: 'Roboto',
-        color: color,
-        fontSize: fontSize == 0 ? DynamicDimensions.size20 : fontSize,
-        fontWeight: FontWeight.w500,
+        color: color ?? Color(0xFF332d2b).withValues(alpha: 0.5),
+        fontSize: fontSize == 0 ? DynamicDimensions.size10 : fontSize,
+        fontWeight: FontWeight.w400,
       ),
       textAlign: textAlign,
     );

@@ -57,74 +57,81 @@ class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
     getDate();
-    return RefreshIndicator(
-      color: AppColors.mainColor,
-      onRefresh: _loadData,
-      child: Column(
-        children: [
-          //The header part of the home page...
-          Container(
-            // this will be used later....
-            child: Container(
-              margin: EdgeInsets.only(
-                top: DynamicDimensions.size45,
-                bottom: DynamicDimensions.size15,
-              ),
-              padding: EdgeInsets.only(
-                left: DynamicDimensions.size20,
-                right: DynamicDimensions.size20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      MainText(text: 'Nigeria', color: AppColors.mainColor),
-                      Row(
-                        children: [
-                          SubText(text: 'Osun'),
-                          Icon(Icons.arrow_drop_down_rounded),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: DynamicDimensions.size10),
-                    child: Column(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: RefreshIndicator(
+        color: AppColors.mainColor,
+        onRefresh: _loadData,
+        child: Column(
+          children: [
+            //The header part of the home page...
+            Container(
+              // this will be used later....
+              child: Container(
+                margin: EdgeInsets.only(
+                  top: DynamicDimensions.size45,
+                  bottom: DynamicDimensions.size15,
+                ),
+                padding: EdgeInsets.only(
+                  left: DynamicDimensions.size20,
+                  right: DynamicDimensions.size20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MainText(
-                          text: '$_dayName, $_dateFormat',
-                          color: AppColors.mainColor,
+                        MainText(text: 'Nigeria', color: AppColors.mainColor),
+                        Row(
+                          children: [
+                            SubText(text: 'Osun'),
+                            Icon(Icons.arrow_drop_down_rounded),
+                          ],
                         ),
-                        MainText(text: _timeFormat, color: AppColors.mainColor),
                       ],
                     ),
-                  ),
-                  Center(
-                    child: Container(
-                      width: DynamicDimensions.size45,
-                      height: DynamicDimensions.size45,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          DynamicDimensions.size15,
-                        ),
-                        color: AppColors.mainColor,
-                      ),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                        size: DynamicDimensions.size24,
+                    Container(
+                      margin: EdgeInsets.only(top: DynamicDimensions.size10),
+                      child: Column(
+                        children: [
+                          MainText(
+                            text: '$_dayName, $_dateFormat',
+                            color: AppColors.mainColor,
+                          ),
+                          MainText(
+                            text: _timeFormat,
+                            color: AppColors.mainColor,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    Center(
+                      child: Container(
+                        width: DynamicDimensions.size45,
+                        height: DynamicDimensions.size45,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            DynamicDimensions.size15,
+                          ),
+                          color: AppColors.mainColor,
+                        ),
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: DynamicDimensions.size24,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          // The body of the home page
-          // The whole food page Need to be scrollable and also maintain its space
-          Expanded(child: SingleChildScrollView(child: FoodPage())),
-        ],
+            // The body of the home page
+            // The whole food page Need to be scrollable and also maintain its space
+            Expanded(child: SingleChildScrollView(child: FoodPage())),
+          ],
+        ),
       ),
     );
   }

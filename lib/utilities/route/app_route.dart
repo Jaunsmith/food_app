@@ -1,6 +1,7 @@
 import 'package:food_app/screens/auth/sign_in_screen.dart';
 import 'package:food_app/screens/auth/sign_up_screen.dart';
 import 'package:food_app/screens/cart/cart_picked_item_screen.dart';
+import 'package:food_app/screens/home/body/drinks_screen.dart';
 import 'package:food_app/screens/home/home_page_screen.dart';
 import 'package:food_app/screens/home/details/food_list_screen_details.dart';
 import 'package:food_app/screens/home/details/main_food_screen_details.dart';
@@ -16,6 +17,7 @@ class AppRoute {
   static const String cartItemsPage = '/cart-items-page';
   static const String signInPage = '/sign-in-page';
   static const String signUpPage = '/sign-in-page';
+  static const String drinksScreen = '/drinks-screen';
 
   // Function is being used in other to be able pass parameter to the path and be able to use for diff purposes
   static String getInitialPage() => '$initial';
@@ -25,6 +27,8 @@ class AppRoute {
   static String getSignInPage() => '$signInPage';
 
   static String getSignUpPage() => '$signUpPage';
+
+  static String getDrinksScreen() => '$drinksScreen';
 
   // To pass data into the function and make it available you use it  within this class like this ...
   static String getMainFoodPage(int index, String cartPage) =>
@@ -41,7 +45,13 @@ class AppRoute {
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
     GetPage(name: splashScreen, page: () => SplashScreen()),
-    GetPage(name: signInPage, page: () => SignInScreen()),
+    GetPage(name: drinksScreen, page: () => DrinksScreen()),
+    GetPage(
+      name: signInPage,
+      page: () => SignInScreen(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(seconds: 3),
+    ),
     GetPage(name: signUpPage, page: () => SignUpScreen()),
     GetPage(
       name: mainFoodPage,

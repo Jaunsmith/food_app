@@ -6,7 +6,6 @@ import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
 import 'package:food_app/utilities/route/app_route.dart';
 import 'package:food_app/widgets/main_text.dart';
-import 'package:food_app/widgets/sub_text.dart';
 import 'package:get/get.dart';
 
 import 'food_list_screen.dart';
@@ -56,6 +55,7 @@ class _FoodPageState extends State<FoodPage> {
                   height: DynamicDimensions.size320,
                   // This section is scrollable section it will be scrolling from left to right and vice versa
                   child: PageView.builder(
+                    padEnds: false,
                     // The item count is the number of item to handle and this is connected to the index
                     itemCount: mainProduct.mainProductList.length,
                     // this link the page view Builder to the Page controller..
@@ -117,22 +117,24 @@ class _FoodPageState extends State<FoodPage> {
             );
           },
         ),
-        SizedBox(height: DynamicDimensions.size30),
+        SizedBox(height: DynamicDimensions.size15),
         Container(
-          margin: EdgeInsets.only(left: DynamicDimensions.size30),
+          margin: EdgeInsets.symmetric(horizontal: DynamicDimensions.size10),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MainText(text: 'Recommended'),
-              SizedBox(width: DynamicDimensions.size10),
-              Container(
-                margin: EdgeInsets.only(bottom: DynamicDimensions.size3),
-                child: MainText(text: '.'),
-              ),
-              SizedBox(width: DynamicDimensions.size10),
-              Container(
-                margin: EdgeInsets.only(bottom: DynamicDimensions.size3),
-                child: SubText(text: 'Food Pairing'),
+              MainText(text: 'Recommended', fontSize: 20),
+
+              TextButton(
+                onPressed: () {
+                  debugPrint("checking drinks...");
+                },
+                child: Text(
+                  "Check Drinks",
+                  style: TextStyle(fontSize: 13, color: AppColors.mainColor),
+                ),
+                // style: TextButton.styleFrom(backgroundColor: Colors.teal),
               ),
             ],
           ),

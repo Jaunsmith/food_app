@@ -41,6 +41,7 @@ class _FoodListPageState extends State<FoodListPage> {
         } else {
           return ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.only(top: 10),
             shrinkWrap: true,
             itemCount: foodListProduct.foodListProductList.length,
             itemBuilder: (context, index) {
@@ -51,11 +52,12 @@ class _FoodListPageState extends State<FoodListPage> {
                 },
                 child: Container(
                   margin: EdgeInsets.only(
-                    left: DynamicDimensions.size20,
-                    right: DynamicDimensions.size20,
+                    left: DynamicDimensions.size10,
+                    right: DynamicDimensions.size10,
                     bottom: DynamicDimensions.size10,
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: DynamicDimensions.size120,
@@ -89,8 +91,10 @@ class _FoodListPageState extends State<FoodListPage> {
                             color: Colors.white60,
                           ),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: DynamicDimensions.size10,
+                            padding: EdgeInsets.only(
+                              bottom: DynamicDimensions.size20,
+                              left: DynamicDimensions.size10,
+                              right: DynamicDimensions.size10,
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

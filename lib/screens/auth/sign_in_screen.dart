@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/screens/auth/sign_up_screen.dart';
+import 'package:food_app/utilities/extension.dart';
 import 'package:food_app/utilities/route/app_route.dart';
 import 'package:food_app/widgets/bio_data_input.dart';
 import 'package:food_app/widgets/custom_loader.dart';
@@ -131,7 +132,7 @@ class SignInScreen extends StatelessWidget {
                         children: [
                           SubText(
                             text: 'Sign into your account',
-                            fontSize: DynamicDimensions.size20,
+                            fontSize: DynamicDimensions.size15,
                             color: AppColors.titleColor,
                           ),
                         ],
@@ -171,20 +172,36 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         SubText(
                           text: 'Don\'t have an account?',
-                          fontSize: DynamicDimensions.size20,
+                          fontSize: DynamicDimensions.size12,
                           color: AppColors.titleColor,
                         ),
-                        TextButton(
-                          onPressed: () {
+                        5.wt,
+                        GestureDetector(
+                          onTap: () {
                             Get.to(
                               () => SignUpScreen(),
                               transition: Transition.fadeIn,
                               duration: Duration(seconds: 2),
                             );
                           },
-                          child: MainText(text: 'Create'),
+                          child: MainText(
+                            text: 'Create',
+                            fontSize: 12,
+                            color: AppColors.mainColor,
+                          ),
                         ),
                       ],
+                    ),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoute.getInitialPage());
+                        },
+                        child: SubText(
+                          text: 'Click here to go to home page',
+                          color: AppColors.mainColor,
+                        ),
+                      ),
                     ),
                   ],
                 ),

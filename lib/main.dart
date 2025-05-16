@@ -14,9 +14,22 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  //   SystemChrome.setSystemUIOverlayStyle(
+  //     const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
     // This called the data asap our app is load
