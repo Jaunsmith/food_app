@@ -179,7 +179,11 @@ class MainFoodDetails extends StatelessWidget {
                       SizedBox(width: DynamicDimensions.size10),
                       Container(
                         padding: EdgeInsets.only(top: DynamicDimensions.size5),
-                        child: MainText(text: mainFood.cartItems.toString()),
+                        child: MainText(
+                          text: mainFood.cartItems.toString(),
+                          fontSize: DynamicDimensions.size20,
+                          color: AppColors.mainColor,
+                        ),
                       ),
                       SizedBox(width: DynamicDimensions.size10),
                       GestureDetector(
@@ -200,7 +204,7 @@ class MainFoodDetails extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: AppColors.mainColor,
                       borderRadius: BorderRadius.circular(
-                        DynamicDimensions.size20,
+                        DynamicDimensions.size15,
                       ),
                     ),
                     child: Row(
@@ -208,6 +212,7 @@ class MainFoodDetails extends StatelessWidget {
                         MainText(
                           text: '\$ ${products.price} |  Add to cart',
                           color: Colors.white,
+                          fontSize: DynamicDimensions.size15,
                         ),
                       ],
                     ),

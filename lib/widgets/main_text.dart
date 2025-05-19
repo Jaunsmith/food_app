@@ -10,6 +10,7 @@ class MainText extends StatelessWidget {
     this.textOverflow = TextOverflow.ellipsis,
     this.maxLines = 0,
     this.textAlign = TextAlign.start,
+    this.fontWeight,
   });
 
   final Color? color;
@@ -18,6 +19,7 @@ class MainText extends StatelessWidget {
   final TextOverflow textOverflow;
   final int maxLines;
   final TextAlign textAlign;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class MainText extends StatelessWidget {
         fontFamily: 'Roboto',
         color: color ?? Color(0xFF332d2b).withValues(alpha: 0.5),
         fontSize: fontSize == 0 ? DynamicDimensions.size10 : fontSize,
-        fontWeight: FontWeight.w400,
+        fontWeight: fontWeight == null ? FontWeight.w400 : fontWeight,
       ),
       textAlign: textAlign,
     );

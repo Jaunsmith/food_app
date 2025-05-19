@@ -27,10 +27,10 @@ class CartItemsRepo {
     //   // this help to convert object to string cause the shared preference only take string, list, map and co but don't take an object...
     //   itemsStorage.add(jsonEncode(e));
     // }
-    toStorage.forEach((e) {
+    for (var e in toStorage) {
       e.time = date;
-      return itemsStorage.add(jsonEncode(e));
-    });
+      continue;
+    }
 
     // This help us to stored the data in the shared preference i.e the local storage..
     sharedPreferences.setStringList(ConstantData.cartListItem, itemsStorage);

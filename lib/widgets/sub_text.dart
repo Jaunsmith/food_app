@@ -8,6 +8,8 @@ class SubText extends StatelessWidget {
     required this.text,
     this.fontSize = 0,
     this.height = 1.2,
+    this.textOverflow = TextOverflow.ellipsis,
+    this.maxLines = 0,
     this.textAlign = TextAlign.start,
   });
 
@@ -16,6 +18,8 @@ class SubText extends StatelessWidget {
   final double fontSize;
   final double height;
   final TextAlign textAlign;
+  final TextOverflow textOverflow;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,8 @@ class SubText extends StatelessWidget {
         height: height,
       ),
       textAlign: textAlign,
+      overflow: maxLines == 0 ? null : textOverflow,
+      maxLines: maxLines == 0 ? 1000 : maxLines,
     );
   }
 }

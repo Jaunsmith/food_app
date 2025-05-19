@@ -16,7 +16,6 @@ class AppRoute {
   static const String foodListPage = '/food-list-page';
   static const String cartItemsPage = '/cart-items-page';
   static const String signInPage = '/sign-in-page';
-  static const String signUpPage = '/sign-in-page';
   static const String drinksScreen = '/drinks-screen';
 
   // Function is being used in other to be able pass parameter to the path and be able to use for diff purposes
@@ -25,8 +24,6 @@ class AppRoute {
   static String getSplashscreen() => '$splashScreen';
 
   static String getSignInPage() => '$signInPage';
-
-  static String getSignUpPage() => '$signUpPage';
 
   static String getDrinksScreen() => '$drinksScreen';
 
@@ -52,7 +49,6 @@ class AppRoute {
       transition: Transition.fadeIn,
       transitionDuration: Duration(seconds: 3),
     ),
-    GetPage(name: signUpPage, page: () => SignUpScreen()),
     GetPage(
       name: mainFoodPage,
       transition: Transition.fadeIn,

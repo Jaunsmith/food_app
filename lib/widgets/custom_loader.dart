@@ -14,10 +14,10 @@ class CustomLoader extends StatelessWidget {
         width: DynamicDimensions.size100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DynamicDimensions.size100 / 2),
-          color: AppColors.mainColor,
+          color: Colors.transparent,
         ),
         child: CircularProgressIndicator.adaptive(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.mainColor,
           strokeWidth: DynamicDimensions.size20,
         ),
       ),

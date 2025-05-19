@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
+import 'package:food_app/screens/home/body/drinks_screen.dart';
 import 'package:food_app/screens/home/body/page_builder_function.dart';
 import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
@@ -18,6 +19,7 @@ class FoodPage extends StatefulWidget {
 }
 
 class _FoodPageState extends State<FoodPage> {
+  bool display = true;
   MainFoodController mainFoodController = Get.find();
   PageController pageController = PageController(viewportFraction: 0.85);
   // in other to make the page display at ago more one will use the pageController..
@@ -124,22 +126,42 @@ class _FoodPageState extends State<FoodPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MainText(text: 'Recommended', fontSize: 20),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    display = true;
+                  });
+                  print('Recommended was clicked + $display');
+                },
+                child: MainText(
+                  text: 'Recommended',
+                  color: AppColors.mainColor,
+                  fontSize: DynamicDimensions.size12 + DynamicDimensions.size5,
+                ),
+              ),
 
               TextButton(
                 onPressed: () {
-                  debugPrint("checking drinks...");
+                  setState(() {
+                    display = false;
+                  });
+                  debugPrint("checking drinks... + $display");
+                  //Get.toNamed(AppRoute.getDrinksScreen());
                 },
                 child: Text(
                   "Check Drinks",
-                  style: TextStyle(fontSize: 13, color: AppColors.mainColor),
+                  style: TextStyle(
+                    fontSize:
+                        DynamicDimensions.size12 + DynamicDimensions.size5,
+                    color: AppColors.mainColor,
+                  ),
                 ),
                 // style: TextButton.styleFrom(backgroundColor: Colors.teal),
               ),
             ],
           ),
         ),
-        FoodListPage(),
+        display ? FoodListPage() : DrinksScreen(),
       ],
     );
   }

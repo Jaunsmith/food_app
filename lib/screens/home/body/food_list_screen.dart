@@ -102,8 +102,9 @@ class _FoodListPageState extends State<FoodListPage> {
                               children: [
                                 MainText(text: food.name ?? 'Unknown'),
                                 SizedBox(height: DynamicDimensions.size10),
-                                const SubText(
-                                  text: 'with Chinese characteristics',
+                                SubText(
+                                  text: food.description ?? 'unknown',
+                                  maxLines: 1,
                                 ),
                                 SizedBox(height: DynamicDimensions.size10),
                                 Row(

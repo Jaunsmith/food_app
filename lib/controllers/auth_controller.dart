@@ -44,11 +44,11 @@ class AuthController extends GetxController implements GetxService {
       // print('Status code: ${response.statusCode}');
 
       if (response.statusCode == 200) {
-        final token = response.body['token'] ?? response.body['access_token'];
+        final token = response.body['token'];
+        print('The token sent is: ${response.body['token']}');
         if (token == null) {
           return ResponseModel(false, 'Token not found in response');
         }
-
         authRepo.userToken(token);
         apiClient.updateHeader(token);
         return ResponseModel(true, token);

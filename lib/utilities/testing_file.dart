@@ -524,3 +524,219 @@ class CartHistory extends StatelessWidget {
 static const String BASE_URL = 'https://mvs.bslmeiyu.com';
 
 */
+/*
+import 'package:flutter/material.dart';
+
+class DrinksScreen extends StatefulWidget {
+  const DrinksScreen({super.key});
+
+  @override
+  DrinksScreenState createState() => DrinksScreenState();
+}
+
+class DrinksScreenState extends State<DrinksScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize TabController with 3 tabs
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose(); // Dispose the controller to avoid memory leak
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('TabBar Example'),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(icon: Icon(Icons.home), text: "Home"),
+            Tab(icon: Icon(Icons.settings), text: "Settings"),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          Center(child: Text("Home Page")),
+          Center(child: Text("Settings Page")),
+        ],
+      ),
+    );
+  }
+}*/
+
+/*
+Column(
+                    children: [
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            top: DynamicDimensions.size10,
+                            bottom: DynamicDimensions.size10,
+                          ),
+                          height: DynamicDimensions.size150,
+                          width: DynamicDimensions.size150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              DynamicDimensions.size150 * 0.5,
+                            ),
+                            color: AppColors.mainColor,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size:
+                                  DynamicDimensions.size100 -
+                                  DynamicDimensions.size20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              DataInput(
+                                icons: Icons.person,
+                                text: details.name,
+                                iconBckColor: AppColors.mainColor,
+                              ),
+                              DataInput(
+                                icons: Icons.phone,
+                                text: details.phone,
+                                iconBckColor: AppColors.yellowColor,
+                              ),
+                              DataInput(
+                                icons: Icons.email,
+                                text: details.email,
+                                iconBckColor: AppColors.yellowColor,
+                              ),
+                              DataInput(
+                                icons: Icons.location_on,
+                                text: 'Ondo road',
+                                iconBckColor: AppColors.yellowColor,
+                              ),
+                              DataInput(
+                                icons: Icons.message_outlined,
+                                text: 'Messages',
+                                iconBckColor: Colors.redAccent,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  if (Get.find<AuthController>().logOut()) {
+                                    Get.find<AuthController>().logOut();
+                                    Get.find<CartItemsController>()
+                                        .removeHistoryData();
+                                    showErrorMessage(
+                                      'Log Out Successfully',
+                                      title: 'Thanks',
+                                      color: AppColors.mainColor,
+                                      icons: Icons.check,
+                                      iconColor: Colors.white,
+                                      time: 3,
+                                    );
+                                    Get.offNamed(AppRoute.getSignInPage());
+                                  }
+                                  print('you taped logout');
+                                },
+                                child: DataInput(
+                                  icons: Icons.logout_rounded,
+                                  text: 'LogOut',
+                                  iconBckColor: Colors.redAccent,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+* */
+
+/*
+Column(
+mainAxisAlignment: MainAxisAlignment.center,
+children: [
+Container(
+margin: EdgeInsets.only(top: DynamicDimensions.size20),
+child: MainText(
+text: 'Please kindly log in or Sign up ',
+color: AppColors.mainBlackColor,
+fontSize: DynamicDimensions.size20,
+),
+),
+10.ht,
+Center(
+child: Row(
+mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+children: [
+TextButton(
+onPressed: () {
+Get.toNamed(AppRoute.getSignInPage());
+},
+child: MainText(
+text: 'Log in ',
+color: AppColors.mainColor,
+fontSize: DynamicDimensions.size20,
+),
+),
+TextButton(
+onPressed: () {
+Get.to(() => SignUpScreen());
+},
+child: MainText(
+text: 'Sign Up',
+color: AppColors.mainColor,
+fontSize: DynamicDimensions.size20,
+),
+),
+],
+),
+),
+],
+)
+*/
+
+/*import 'package:food_app/data_process/repository/user_repo.dart';
+import 'package:food_app/models/response_model.dart';
+import 'package:food_app/models/user_model.dart';
+import 'package:get/get.dart';
+
+class UserController extends GetxController implements GetxService {
+  final UserRepo userRepo;
+
+  UserController({required this.userRepo});
+
+  bool _loaded = false;
+  late UserModel _userModel;
+
+  bool get loaded => _loaded;
+  UserModel get userModel => _userModel;
+
+  Future<ResponseModel> getUserData() async {
+    _loaded = true;
+    update();
+    Response response = await userRepo.getUserData();
+    late ResponseModel responseModel;
+    if (response.statusCode == 200) {
+      responseModel = ResponseModel(true, 'Data successfully gotten ');
+      _userModel = UserModel.fromJson(response.body);
+    } else {
+      responseModel = ResponseModel(false, response.statusText!);
+    }
+    _loaded = false;
+    update();
+    return responseModel;
+  }
+}*/

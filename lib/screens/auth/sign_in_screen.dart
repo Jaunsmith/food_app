@@ -178,11 +178,7 @@ class SignInScreen extends StatelessWidget {
                         5.wt,
                         GestureDetector(
                           onTap: () {
-                            Get.to(
-                              () => SignUpScreen(),
-                              transition: Transition.fadeIn,
-                              duration: Duration(seconds: 2),
-                            );
+                            Get.to(() => SignUpScreen());
                           },
                           child: MainText(
                             text: 'Create',
