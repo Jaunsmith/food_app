@@ -29,13 +29,10 @@ class CartItemsRepo {
     // }
     for (var e in toStorage) {
       e.time = date;
-      continue;
+      itemsStorage.add(jsonEncode(e)); // ✔ Add to storage list
     }
 
     // This help us to stored the data in the shared preference i.e the local storage..
-    sharedPreferences.setStringList(ConstantData.cartListItem, itemsStorage);
-
-    // getStorageItems();
   }
 
   // This help us to get the data stored in the pickedItemsStorage
@@ -51,6 +48,7 @@ class CartItemsRepo {
       storageItems.add(CartItemsModel.fromJson(jsonDecode(e)));
     }
     // print('The storage  data is ${storedData.toString()}');
+
     return storageItems;
   }
 
@@ -64,7 +62,7 @@ class CartItemsRepo {
     List<CartItemsModel> pickedHistory = [];
     for (var e in pickedItemsStorage) {
       pickedHistory.add(CartItemsModel.fromJson(jsonDecode(e)));
-      print('The cart history data is : $pickedItemsStorage');
+      // print('The cart history data is : $pickedItemsStorage');
     }
     return pickedHistory;
   }

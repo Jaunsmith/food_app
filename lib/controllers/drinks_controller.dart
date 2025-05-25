@@ -22,7 +22,7 @@ class DrinksController extends GetxController {
       _productDrinksList = [];
       _productDrinksList.addAll(Product.fromJson(response.body).products);
       _dataAvailable = true;
-      print('The length of the foodList is ${_productDrinksList.length}');
+      print('The length of the drinks  is ${_productDrinksList.length}');
       update();
     } else {
       print("❌list  Error getting products:");

@@ -52,7 +52,7 @@ class DrinksScreenDetails extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (drinkListPage == 'foodListPage') {
+                    if (drinkListPage == 'drinkListPage') {
                       Get.toNamed(AppRoute.getCartItemsPage());
                     } else {
                       Get.toNamed(AppRoute.getInitialPage());
@@ -60,12 +60,11 @@ class DrinksScreenDetails extends StatelessWidget {
                   },
                   child: IconsReuse(icons: Icons.clear),
                 ),
-                // IconsReuse(icons: Icons.shopping_cart_outlined),
                 GetBuilder<MainFoodController>(
-                  builder: (drinksControl) {
+                  builder: (productsController) {
                     return GestureDetector(
                       onTap:
-                          drinksControl.totalQuantity >= 1
+                          productsController.totalQuantity >= 1
                               ? () {
                                 Get.toNamed(AppRoute.getCartItemsPage());
                               }
@@ -73,12 +72,14 @@ class DrinksScreenDetails extends StatelessWidget {
                       child: Stack(
                         children: [
                           IconsReuse(icons: Icons.shopping_cart_outlined),
-                          drinksControl.totalQuantity >= 1
+                          productsController.totalQuantity >= 1
                               ? Positioned(
                                 right: 0,
                                 top: 0,
                                 child: SuperscriptItemCount(
-                                  text: drinksControl.totalQuantity.toString(),
+                                  text:
+                                      productsController.totalQuantity
+                                          .toString(),
                                 ),
                               )
                               : Container(),
@@ -115,8 +116,9 @@ class DrinksScreenDetails extends StatelessWidget {
                   padding: EdgeInsets.only(left: DynamicDimensions.size10),
                   child: MainText(
                     fontSize: DynamicDimensions.size26,
-                    text: productLists.name ?? 'unknow',
+                    text: productLists.name ?? 'unknown',
                     maxLines: 2,
+                    color: AppColors.mainColor,
                   ),
                 ),
               ),
@@ -128,7 +130,7 @@ class DrinksScreenDetails extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: DynamicDimensions.size10,
               ),
-              child: AboutFoodText(text: productLists.description ?? 'unknow'),
+              child: AboutFoodText(text: productLists.description ?? 'unknown'),
             ),
           ),
         ],
@@ -210,7 +212,7 @@ class DrinksScreenDetails extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         cartItems.addItems(productLists);
-                        print('the food list add button is clicked');
+                        print('the drinks list add button is clicked');
                       },
                       child: Container(
                         padding: EdgeInsets.all(DynamicDimensions.size15),

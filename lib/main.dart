@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/controllers/cart_items_controller.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
+import 'package:food_app/screens/address/delivery_address_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_app/dependency/dependencies.dart' as dependent;
 
@@ -43,9 +44,9 @@ class _MyAppState extends State<MyApp> {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Food Delivery',
-              //home: SignUpScreen(),
-              initialRoute: AppRoute.getSplashscreen(),
-              getPages: AppRoute.routes,
+              home: DeliveryAddressScreen(),
+              // initialRoute: AppRoute.getSplashscreen(),
+              // getPages: AppRoute.routes,
             );
           },
         );

@@ -46,8 +46,8 @@ class ApiClient extends GetConnect implements GetxService {
     try {
       // This get the response gotten from the server and save it in the response variable of Response type
       Response response = await get(uri, headers: headers ?? _mainHeaders);
-      print("⚡ Status Code: ${response.statusCode}");
-      print("⚡ Response Body: ${response.body}");
+      // print("⚡ Status Code: ${response.statusCode}");
+      // print("⚡ Response Body: ${response.body}");
       return response;
     } catch (e) {
       // Return the error in case the data is failed to get...
@@ -89,5 +89,10 @@ class ApiClient extends GetConnect implements GetxService {
       // This is use for authentication.. the type of the token is bearer...
       'Authorization': 'Bearer $token',
     };
+  }
+
+  Future<Response> getMapLink(String uri) async {
+    Response response = (uri) as Response;
+    return response;
   }
 }

@@ -126,7 +126,11 @@ class MainFoodDetails extends StatelessWidget {
                 children: [
                   FoodReviewDetails(text: products.name, maxLines: 2),
                   SizedBox(height: DynamicDimensions.size20),
-                  MainText(text: 'Introduction'),
+                  MainText(
+                    text: 'Introduction',
+                    fontSize: DynamicDimensions.size20,
+                    color: AppColors.mainBlackColor,
+                  ),
                   SizedBox(height: DynamicDimensions.size10),
                   Expanded(
                     child: SingleChildScrollView(

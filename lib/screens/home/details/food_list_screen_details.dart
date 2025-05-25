@@ -118,8 +118,9 @@ class FoodListPageDetails extends StatelessWidget {
                   padding: EdgeInsets.only(left: DynamicDimensions.size10),
                   child: MainText(
                     fontSize: DynamicDimensions.size26,
-                    text: productLists.name ?? 'unknow',
+                    text: productLists.name ?? 'unknown',
                     maxLines: 2,
+                    color: AppColors.mainColor,
                   ),
                 ),
               ),

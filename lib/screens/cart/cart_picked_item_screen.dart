@@ -109,7 +109,7 @@ class CartPickedItem extends StatelessWidget {
                                     'You can only order  maximum of 20 quantity per items',
                                 maxLines: 2,
                                 fontSize: DynamicDimensions.size24,
-                                color: Colors.redAccent,
+                                color: Colors.white,
                               ),
                             ),
                             SizedBox(height: DynamicDimensions.size15),
@@ -296,6 +296,12 @@ class CartPickedItem extends StatelessWidget {
                                                                           .getCartItem[index]
                                                                           .quantity
                                                                           .toString(),
+                                                                  fontSize:
+                                                                      DynamicDimensions
+                                                                          .size15,
+                                                                  color:
+                                                                      AppColors
+                                                                          .mainColor,
                                                                 ),
                                                               ),
                                                               SizedBox(
@@ -378,12 +384,13 @@ class CartPickedItem extends StatelessWidget {
                           ),
                           child: MainText(
                             text: '\$ ${cartItemsPage.totalPriceOfProduct}',
+                            color: AppColors.mainColor,
+                            fontSize: DynamicDimensions.size20,
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
-                            if (Get.find<AuthController>().userLoggedIn() ==
-                                true) {
+                            if (Get.find<AuthController>().userLoggedIn()) {
                               cartItemsPage.getPickedItemsData();
                             } else {
                               showErrorMessage(

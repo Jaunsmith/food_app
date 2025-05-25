@@ -27,6 +27,7 @@ class FoodReviewDetails extends StatelessWidget {
           text: text,
           fontSize: DynamicDimensions.size26,
           maxLines: maxLines == 0 ? 1 : maxLines,
+          color: AppColors.mainColor,
         ),
         SizedBox(height: DynamicDimensions.size10),
         Row(

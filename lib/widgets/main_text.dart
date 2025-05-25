@@ -30,7 +30,7 @@ class MainText extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'Roboto',
         color: color ?? Color(0xFF332d2b).withValues(alpha: 0.5),
-        fontSize: fontSize == 0 ? DynamicDimensions.size10 : fontSize,
+        fontSize: fontSize == 0 ? DynamicDimensions.size15 : fontSize,
         fontWeight: fontWeight == null ? FontWeight.w400 : fontWeight,
       ),
       textAlign: textAlign,

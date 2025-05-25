@@ -41,7 +41,7 @@ class _FoodListPageState extends State<FoodListPage> {
         } else {
           return ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(top: DynamicDimensions.size10),
             shrinkWrap: true,
             itemCount: foodListProduct.foodListProductList.length,
             itemBuilder: (context, index) {
@@ -78,7 +78,7 @@ class _FoodListPageState extends State<FoodListPage> {
                       ),
                       Expanded(
                         child: Container(
-                          height: DynamicDimensions.size100,
+                          height: DynamicDimensions.size120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(

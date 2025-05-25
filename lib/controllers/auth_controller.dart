@@ -45,7 +45,6 @@ class AuthController extends GetxController implements GetxService {
 
       if (response.statusCode == 200) {
         final token = response.body['token'];
-        print('The token sent is: ${response.body['token']}');
         if (token == null) {
           return ResponseModel(false, 'Token not found in response');
         }

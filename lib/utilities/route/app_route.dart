@@ -1,13 +1,14 @@
 import 'package:food_app/screens/auth/sign_in_screen.dart';
-import 'package:food_app/screens/auth/sign_up_screen.dart';
 import 'package:food_app/screens/cart/cart_picked_item_screen.dart';
-import 'package:food_app/screens/home/body/drinks_screen.dart';
+import 'package:food_app/screens/home/details/drinks_screen_details.dart';
 import 'package:food_app/screens/home/home_page_screen.dart';
 import 'package:food_app/screens/home/details/food_list_screen_details.dart';
 import 'package:food_app/screens/home/details/main_food_screen_details.dart';
 
 import 'package:food_app/screens/splash/splash_screen.dart';
 import 'package:get/get.dart';
+
+import '../../screens/address/delivery_address_screen.dart';
 
 class AppRoute {
   static const String initial = '/';
@@ -17,6 +18,7 @@ class AppRoute {
   static const String cartItemsPage = '/cart-items-page';
   static const String signInPage = '/sign-in-page';
   static const String drinksScreen = '/drinks-screen';
+  static const String locationScreen = '/location-screen';
 
   // Function is being used in other to be able pass parameter to the path and be able to use for diff purposes
   static String getInitialPage() => '$initial';
@@ -25,7 +27,7 @@ class AppRoute {
 
   static String getSignInPage() => '$signInPage';
 
-  static String getDrinksScreen() => '$drinksScreen';
+  static String getLocationScreen() => '$locationScreen';
 
   // To pass data into the function and make it available you use it  within this class like this ...
   static String getMainFoodPage(int index, String cartPage) =>
@@ -36,13 +38,16 @@ class AppRoute {
   static String getFoodListPage(int indexFoodList, String foodListPageR) =>
       '$foodListPage?indexFoodList=$indexFoodList&foodListPageR=$foodListPageR';
 
+  static String getDrinksListPage(int indexDrinkList, String drinkListPageR) =>
+      '$drinksScreen?indexDrinkList=$indexDrinkList&drinkListPageR=$drinkListPageR';
+
   static String getCartItemsPage() => '$cartItemsPage';
 
   //  This make out routing very organizing and easy to use anywhere within the app and also faster...
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
     GetPage(name: splashScreen, page: () => SplashScreen()),
-    GetPage(name: drinksScreen, page: () => DrinksScreen()),
+    GetPage(name: locationScreen, page: () => DeliveryAddressScreen()),
     GetPage(
       name: signInPage,
       page: () => SignInScreen(),
@@ -74,6 +79,20 @@ class AppRoute {
         return FoodListPageDetails(
           index: int.parse(indexFoodList!),
           foodListPage: foodListPageR!,
+        );
+      },
+    ),
+    GetPage(
+      name: drinksScreen,
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: Duration(seconds: 2),
+      page: () {
+        var indexDrinkList = Get.parameters['indexDrinkList'];
+        var drinkListPageR = Get.parameters['drinkListPageR'];
+        print('now routed to the drink details page');
+        return DrinksScreenDetails(
+          index: int.parse(indexDrinkList!),
+          drinkListPage: drinkListPageR!,
         );
       },
     ),

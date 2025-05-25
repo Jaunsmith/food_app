@@ -2,6 +2,7 @@ import 'package:food_app/controllers/auth_controller.dart';
 import 'package:food_app/controllers/cart_items_controller.dart';
 import 'package:food_app/controllers/drinks_controller.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
+import 'package:food_app/controllers/delivery_address_controller.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
 import 'package:food_app/controllers/user_controller.dart';
 import 'package:food_app/data_process/api/api_client.dart';
@@ -9,6 +10,7 @@ import 'package:food_app/data_process/repository/auth_repo.dart';
 import 'package:food_app/data_process/repository/cart_items_repo.dart';
 import 'package:food_app/data_process/repository/drinks_repo.dart';
 import 'package:food_app/data_process/repository/food_list_repo.dart';
+import 'package:food_app/data_process/repository/delivery_address_repo.dart';
 import 'package:food_app/data_process/repository/main_food_repo.dart';
 import 'package:food_app/data_process/repository/user_repo.dart';
 import 'package:food_app/utilities/constant_data.dart';
@@ -43,6 +45,7 @@ Future<void> init() async {
   // This help to pass the package to cart repo after it has been loaded..
   Get.lazyPut(() => CartItemsRepo(sharedPreferences: Get.find()));
   Get.lazyPut(() => UserRepo(apiClient: Get.find()));
+  Get.lazyPut(() => DeliveryAddressRepo(sharedPreferences: Get.find()));
 
   // controllers
   Get.lazyPut(() => MainFoodController(mainFoodRepo: Get.find()));
@@ -51,4 +54,5 @@ Future<void> init() async {
   Get.lazyPut(() => CartItemsController(cartItemsRepo: Get.find()));
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
   Get.lazyPut(() => UserController(userRepo: Get.find()));
+  Get.lazyPut(() => DeliveryAddressController(deliveryAddressRepo: Get.find()));
 }
