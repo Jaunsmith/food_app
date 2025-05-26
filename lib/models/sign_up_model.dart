@@ -11,7 +11,6 @@ class SignUpModel {
     required this.name,
   });
 
-  // This help to convert the object data to a Json format...
   Map<String, dynamic> toJson() {
     Map<String, dynamic> userData = {};
     userData['f_name'] = this.name;

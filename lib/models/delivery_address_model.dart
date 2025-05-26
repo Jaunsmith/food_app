@@ -21,7 +21,7 @@ class DeliveryAddressModel {
     return DeliveryAddressModel(
       recipientCity: json['recipientCity'],
       recipientMail: json['recipientMail'],
-      recipientName: json['recipientMail'],
+      recipientName: json['recipientName'],
       recipientPhone: json['recipientPhone'],
       recipientState: json['recipientState'],
       recipientStreetName: json['recipientStreetName'],

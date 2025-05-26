@@ -1,22 +1,20 @@
 import 'package:food_app/data_process/api/api_client.dart';
 import 'package:food_app/data_process/repository/auth_repo.dart';
 import 'package:food_app/models/response_model.dart';
-import 'package:food_app/models/sign_up_model.dart';
 import 'package:get/get.dart';
 
-// The service is called because we need to use repo
+import '../models/sign_up_model.dart';
+
 class AuthController extends GetxController implements GetxService {
   final AuthRepo authRepo;
+  bool _loaded = false;
+  bool get loaded => _loaded;
+
   AuthController({required this.authRepo});
 
-  late bool _loaded = false;
-  bool get loaded => _loaded;
-  // This is a registration method communicating to the server and internet
   Future<ResponseModel> registration(SignUpModel signUpModel) async {
-    // this means data is loading or loaded
     _loaded = true;
     update();
-
     Response response = await authRepo.registration(signUpModel);
     late ResponseModel responseModel;
     if (response.statusCode == 200) {
@@ -25,30 +23,25 @@ class AuthController extends GetxController implements GetxService {
     } else {
       responseModel = ResponseModel(false, response.statusText!);
     }
-
     _loaded = false;
     update();
     return responseModel;
   }
 
-  // This is a login method communicating to the server and internet
   Future<ResponseModel> login(String number, String password) async {
     ApiClient apiClient = Get.find();
     _loaded = true;
     update();
-
     try {
       Response response = await authRepo.login(number, password);
-
-      // print('Full response: ${response.body}');
-      // print('Status code: ${response.statusCode}');
-
       if (response.statusCode == 200) {
         final token = response.body['token'];
         if (token == null) {
           return ResponseModel(false, 'Token not found in response');
         }
         authRepo.userToken(token);
+        authRepo.saveUserLoginDetails(number, password);
+        authRepo.saveUserPhone(number);
         apiClient.updateHeader(token);
         return ResponseModel(true, token);
       } else {
@@ -67,19 +60,16 @@ class AuthController extends GetxController implements GetxService {
     }
   }
 
-  // to hold the user login info...
-  void saveUserLoginDetails(String number, String password) {
-    authRepo.saveUserLoginDetails(number, password);
+  bool userLoggedIn() {
+    return authRepo.userLoggedIn();
   }
 
-  bool userLoggedIn() {
-    var check = authRepo.userLoggedIn();
-
-    print(' the check data is  $check');
-    return check;
+  String getCurrentUserPhone() {
+    return authRepo.getUserPhone();
   }
 
   bool logOut() {
+    authRepo.clearUserPhone();
     return authRepo.logOut();
   }
 }

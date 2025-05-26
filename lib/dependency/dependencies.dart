@@ -54,5 +54,10 @@ Future<void> init() async {
   Get.lazyPut(() => CartItemsController(cartItemsRepo: Get.find()));
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
   Get.lazyPut(() => UserController(userRepo: Get.find()));
-  Get.lazyPut(() => DeliveryAddressController(deliveryAddressRepo: Get.find()));
+  Get.lazyPut(
+    () => DeliveryAddressController(
+      deliveryAddressRepo: Get.find(),
+      authController: Get.find(),
+    ),
+  );
 }

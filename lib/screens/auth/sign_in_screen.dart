@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/controllers/auth_controller.dart';
 import 'package:food_app/screens/auth/sign_up_screen.dart';
+import 'package:food_app/utilities/colors.dart';
+import 'package:food_app/utilities/dynamic_dimensions.dart';
 import 'package:food_app/utilities/extension.dart';
 import 'package:food_app/utilities/route/app_route.dart';
 import 'package:food_app/widgets/bio_data_input.dart';
 import 'package:food_app/widgets/custom_loader.dart';
 import 'package:food_app/widgets/main_text.dart';
+import 'package:food_app/widgets/show_error_messages.dart';
 import 'package:food_app/widgets/sub_text.dart';
 import 'package:get/get.dart';
-
-import '../../controllers/auth_controller.dart';
-import '../../utilities/colors.dart';
-import '../../utilities/dynamic_dimensions.dart';
-import '../../widgets/show_error_messages.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -22,12 +21,11 @@ class SignInScreen extends StatelessWidget {
     var passwordController = TextEditingController();
 
     void login(AuthController authController) {
-      // . trim() remove any white space there and only grap the text
       String phone = numberController.text.trim();
       String password = passwordController.text.trim();
 
       if (phone.isEmpty) {
-        showErrorMessage('Enter your valid mail', title: 'Mail');
+        showErrorMessage('Enter your phone number', title: 'Phone');
       } else if (password.length < 8) {
         showErrorMessage(
           'Password can\'t be less than 8 character',
@@ -36,10 +34,9 @@ class SignInScreen extends StatelessWidget {
       } else {
         authController.login(phone, password).then((value) {
           if (value.isSuccessful) {
-            print('Login Successful');
             showErrorMessage(
               'Login Successful',
-              title: 'logged in',
+              title: 'Logged in',
               color: AppColors.mainColor,
               icons: Icons.check,
               iconColor: Colors.white,
@@ -47,15 +44,13 @@ class SignInScreen extends StatelessWidget {
             Get.toNamed(AppRoute.getInitialPage());
           } else {
             showErrorMessage(
-              'invalid Login details',
+              'Invalid Login details',
               title: 'Error',
               icons: Icons.close,
               iconColor: Colors.white,
             );
-            print('The error gotten is ${value.message}');
           }
         });
-        print('The entered details are Email: $phone   Password: $password');
       }
     }
 
@@ -69,13 +64,9 @@ class SignInScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height:
-                          DynamicDimensions.size80 - DynamicDimensions.size30,
-                    ),
+                    SizedBox(height: DynamicDimensions.size30),
                     Container(
-                      height:
-                          DynamicDimensions.size220 - DynamicDimensions.size30,
+                      height: DynamicDimensions.size150,
                       child: Center(
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
@@ -140,9 +131,7 @@ class SignInScreen extends StatelessWidget {
                     ),
                     SizedBox(height: DynamicDimensions.size30),
                     GestureDetector(
-                      onTap: () {
-                        login(authControl);
-                      },
+                      onTap: () => login(authControl),
                       child: Center(
                         child: Container(
                           margin: EdgeInsets.only(
@@ -159,7 +148,7 @@ class SignInScreen extends StatelessWidget {
                             color: AppColors.mainColor,
                           ),
                           child: MainText(
-                            text: 'Sign in ',
+                            text: 'Sign in',
                             color: Colors.white,
                             fontSize: 25,
                           ),
@@ -177,9 +166,7 @@ class SignInScreen extends StatelessWidget {
                         ),
                         5.wt,
                         GestureDetector(
-                          onTap: () {
-                            Get.to(() => SignUpScreen());
-                          },
+                          onTap: () => Get.to(() => SignUpScreen()),
                           child: MainText(
                             text: 'Create',
                             fontSize: 12,
@@ -190,9 +177,7 @@ class SignInScreen extends StatelessWidget {
                     ),
                     Center(
                       child: TextButton(
-                        onPressed: () {
-                          Get.toNamed(AppRoute.getInitialPage());
-                        },
+                        onPressed: () => Get.toNamed(AppRoute.getInitialPage()),
                         child: SubText(
                           text: 'Click here to go to home page',
                           color: AppColors.mainColor,

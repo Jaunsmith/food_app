@@ -27,7 +27,7 @@ class AppRoute {
 
   static String getSignInPage() => '$signInPage';
 
-  static String getLocationScreen() => '$locationScreen';
+  static String getDeliveryScreen() => '$locationScreen';
 
   // To pass data into the function and make it available you use it  within this class like this ...
   static String getMainFoodPage(int index, String cartPage) =>

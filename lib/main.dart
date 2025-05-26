@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/controllers/cart_items_controller.dart';
 import 'package:food_app/controllers/food_list_controller.dart';
 import 'package:food_app/controllers/main_food_controller.dart';
-import 'package:food_app/screens/address/delivery_address_screen.dart';
+
 import 'package:get/get.dart';
 import 'package:food_app/dependency/dependencies.dart' as dependent;
 
@@ -24,14 +24,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  //   SystemChrome.setSystemUIOverlayStyle(
-  //     const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-  //   );
-  // }
-  @override
   Widget build(BuildContext context) {
     // This called the data asap our app is load
     Get.find<CartItemsController>().getStorageData();
@@ -44,9 +36,9 @@ class _MyAppState extends State<MyApp> {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Food Delivery',
-              home: DeliveryAddressScreen(),
-              // initialRoute: AppRoute.getSplashscreen(),
-              // getPages: AppRoute.routes,
+              // home: DeliveryAddressScreen(),
+              initialRoute: AppRoute.getSplashscreen(),
+              getPages: AppRoute.routes,
             );
           },
         );

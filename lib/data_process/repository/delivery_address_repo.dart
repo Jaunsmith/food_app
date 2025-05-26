@@ -1,31 +1,39 @@
 import 'dart:convert';
-
 import 'package:food_app/models/delivery_address_model.dart';
+import 'package:food_app/utilities/constant_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DeliveryAddressRepo {
-  SharedPreferences sharedPreferences;
+  final SharedPreferences sharedPreferences;
 
   DeliveryAddressRepo({required this.sharedPreferences});
 
-  Future<void> addDeliveryDetails(
-    String number,
+  Future<bool> addDeliveryDetails(
+    String phoneKey,
     DeliveryAddressModel deliveryDetails,
   ) async {
-    final preference = await SharedPreferences.getInstance();
-    String userData = jsonEncode(deliveryDetails.toJson());
-    await preference.setString(number, userData);
+    try {
+      String userData = jsonEncode(deliveryDetails.toJson());
+      return await sharedPreferences.setString(
+        '${ConstantData.DELIVERY_ADDRESS_PREFIX}$phoneKey',
+        userData,
+      );
+    } catch (e) {
+      return false;
+    }
   }
 
-  Future<DeliveryAddressModel?> getUserDeliveryDetails(String number) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    String? deliveryDetails = prefs.getString(number);
-
-    if (deliveryDetails != null) {
-      Map<String, dynamic> details = jsonDecode(deliveryDetails);
-      return DeliveryAddressModel.fromJson(details);
-    } else {
+  Future<DeliveryAddressModel?> getUserDeliveryDetails(String phoneKey) async {
+    try {
+      String? deliveryDetails = sharedPreferences.getString(
+        '${ConstantData.DELIVERY_ADDRESS_PREFIX}$phoneKey',
+      );
+      if (deliveryDetails != null) {
+        Map<String, dynamic> details = jsonDecode(deliveryDetails);
+        return DeliveryAddressModel.fromJson(details);
+      }
+      return null;
+    } catch (e) {
       return null;
     }
   }

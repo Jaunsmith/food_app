@@ -31,8 +31,8 @@ class CartItemsRepo {
       e.time = date;
       itemsStorage.add(jsonEncode(e)); // ✔ Add to storage list
     }
-
     // This help us to stored the data in the shared preference i.e the local storage..
+    sharedPreferences.setStringList(ConstantData.cartListItem, itemsStorage);
   }
 
   // This help us to get the data stored in the pickedItemsStorage

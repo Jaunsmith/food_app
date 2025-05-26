@@ -392,6 +392,14 @@ class CartPickedItem extends StatelessWidget {
                           onTap: () {
                             if (Get.find<AuthController>().userLoggedIn()) {
                               cartItemsPage.getPickedItemsData();
+                              showErrorMessage(
+                                'Kindly add or preview Delivery details',
+                                title: 'Delivery Details',
+                                icons: Icons.location_history_rounded,
+                                color: AppColors.mainColor,
+                                time: 3,
+                              );
+                              Get.toNamed(AppRoute.getDeliveryScreen());
                             } else {
                               showErrorMessage(
                                 'You need to SignIn to your account',

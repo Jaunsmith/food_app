@@ -6,56 +6,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepo {
   final ApiClient apiClient;
-  // to save the token that will be send from the server for authentication purpose
   final SharedPreferences sharedPreferences;
 
   AuthRepo({required this.apiClient, required this.sharedPreferences});
 
-  // For registration ...
-  Future<Response> registration(SignUpModel sigUpModel) async {
-    // The data need to be converted to Json since we are sending it to the server...
-    Response response = await apiClient.postData(
+  Future<Response> registration(SignUpModel signUpModel) async {
+    return await apiClient.postData(
       ConstantData.REGISTRATION_URL,
-      sigUpModel.toJson(),
+      signUpModel.toJson(),
     );
-    return response;
   }
 
-  // This is to save the token for authentication purpose....
   Future<String> getUserToken() async {
     return sharedPreferences.getString(ConstantData.TOKEN) ?? 'None';
   }
 
-  // confirming the status of the user if logged in or not...
   bool userLoggedIn() {
-    var checking = sharedPreferences.containsKey(ConstantData.TOKEN);
-
-    print('it contain a token... $checking ');
-    return checking;
+    return sharedPreferences.containsKey(ConstantData.TOKEN);
   }
 
-  // for login
   Future<Response> login(String number, String password) async {
-    return await apiClient.postData(
-      ConstantData.LOGIN_URL,
-      {'phone': number, 'password': password},
-      isAuthRequest: true, // This will prevent sending auth header
-    );
+    return await apiClient.postData(ConstantData.LOGIN_URL, {
+      'phone': number,
+      'password': password,
+    }, isAuthRequest: true);
   }
 
-  // This is used to authenticate a user...sent from the server
   Future<bool> userToken(String token) async {
     apiClient.token = token;
     apiClient.updateHeader(token);
-    // the token is saved in other to keep the data in the phone local memory for future use ...
-    var savedData = await sharedPreferences.setString(
-      ConstantData.TOKEN,
-      token,
-    );
-    return savedData;
+    return await sharedPreferences.setString(ConstantData.TOKEN, token);
   }
 
-  // This hold the user login details ...
   Future<void> saveUserLoginDetails(String number, String password) async {
     try {
       await sharedPreferences.setString(ConstantData.PHONE, number);
@@ -65,13 +47,25 @@ class AuthRepo {
     }
   }
 
-  //for logging out of the application...
   bool logOut() {
     sharedPreferences.remove(ConstantData.TOKEN);
     sharedPreferences.remove(ConstantData.PASSWORD);
     sharedPreferences.remove(ConstantData.PHONE);
+    sharedPreferences.remove(ConstantData.USER_PHONE);
     apiClient.token = '';
     apiClient.updateHeader('');
     return true;
+  }
+
+  String getUserPhone() {
+    return sharedPreferences.getString(ConstantData.USER_PHONE) ?? '';
+  }
+
+  Future<bool> saveUserPhone(String phone) async {
+    return await sharedPreferences.setString(ConstantData.USER_PHONE, phone);
+  }
+
+  Future<bool> clearUserPhone() async {
+    return await sharedPreferences.remove(ConstantData.USER_PHONE);
   }
 }

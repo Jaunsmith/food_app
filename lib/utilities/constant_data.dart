@@ -1,7 +1,7 @@
 class ConstantData {
   static const String APP_NAME = 'OWOVICKKYFOOD';
   static const int APP_VERSION = 1;
-  static const String BASE_URL = 'http://192.168.1.132:8000';
+  static const String BASE_URL = 'http://192.168.53.171:8000';
   static const String MAIN_FOOD_URL = '/api/v1/products/popular';
   static const String FOOD_LIST_URL = '/api/v1/products/recommended';
   static const String DRINK_LIST_URL = '/api/v1/products/drinks';
@@ -20,4 +20,6 @@ class ConstantData {
   static const String UPLOAD_URL = '/uploads/';
   static const String cartListItem = 'cart-List-Items';
   static const String cartHistoryItem = 'cart-History=Items';
+  static const String USER_PHONE = "user_phone";
+  static const String DELIVERY_ADDRESS_PREFIX = "delivery_address_";
 }
