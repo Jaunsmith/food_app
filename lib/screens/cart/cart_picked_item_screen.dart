@@ -391,7 +391,9 @@ class CartPickedItem extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             if (Get.find<AuthController>().userLoggedIn()) {
-                              cartItemsPage.getPickedItemsData();
+                              String customerNumber =
+                                  Get.find<AuthController>()
+                                      .getCurrentUserPhone();
                               showErrorMessage(
                                 'Kindly add or preview Delivery details',
                                 title: 'Delivery Details',
@@ -400,6 +402,7 @@ class CartPickedItem extends StatelessWidget {
                                 time: 3,
                               );
                               Get.toNamed(AppRoute.getDeliveryScreen());
+                              cartItemsPage.getPickedItemsData();
                             } else {
                               showErrorMessage(
                                 'You need to SignIn to your account',
@@ -410,7 +413,6 @@ class CartPickedItem extends StatelessWidget {
                               );
                               Get.toNamed(AppRoute.getSignInPage());
                             }
-
                             print('check out clicked');
                           },
                           child: Container(

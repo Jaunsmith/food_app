@@ -4,6 +4,7 @@ import 'package:food_app/controllers/delivery_address_controller.dart';
 import 'package:food_app/models/delivery_address_model.dart';
 import 'package:food_app/utilities/colors.dart';
 import 'package:food_app/utilities/dynamic_dimensions.dart';
+import 'package:food_app/utilities/route/app_route.dart';
 import 'package:food_app/widgets/bio_data_input.dart';
 import 'package:food_app/widgets/custom_loader.dart';
 import 'package:food_app/widgets/main_text.dart';
@@ -252,9 +253,9 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                                 'Data submitted  successfully',
                                 time: 2,
                               );
-                              Get.find<CartItemsController>()
-                                  .getPickedItemsData();
-                              Get.back();
+                              // Get.find<CartItemsController>()
+                              //     .getPickedItemsData();
+                              Get.toNamed(AppRoute.getInitialPage());
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(

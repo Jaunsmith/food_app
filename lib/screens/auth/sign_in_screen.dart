@@ -66,7 +66,7 @@ class SignInScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: DynamicDimensions.size30),
                     Container(
-                      height: DynamicDimensions.size150,
+                      height: DynamicDimensions.size220,
                       child: Center(
                         child: CircleAvatar(
                           backgroundColor: Colors.white,

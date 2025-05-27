@@ -2,15 +2,18 @@ import 'package:food_app/data_process/api/api_client.dart';
 import 'package:food_app/data_process/repository/auth_repo.dart';
 import 'package:food_app/models/response_model.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/sign_up_model.dart';
 
 class AuthController extends GetxController implements GetxService {
   final AuthRepo authRepo;
+  final SharedPreferences? sharedPreferences;
+
   bool _loaded = false;
   bool get loaded => _loaded;
 
-  AuthController({required this.authRepo});
+  AuthController({required this.authRepo, this.sharedPreferences});
 
   Future<ResponseModel> registration(SignUpModel signUpModel) async {
     _loaded = true;
@@ -65,7 +68,11 @@ class AuthController extends GetxController implements GetxService {
   }
 
   String getCurrentUserPhone() {
-    return authRepo.getUserPhone();
+    if (userLoggedIn() == true) {
+      print('the user enter number is ${authRepo.getUserPhone()}');
+      return authRepo.getUserPhone();
+    }
+    return '';
   }
 
   bool logOut() {
